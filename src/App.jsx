@@ -1,34 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+//
+import React, { useState, useEffect }from "react"
+import styled from "styled-components"
 
-function App() {
-  const [count, setCount] = useState(0)
+//
+import { 
+  Bird 
+} from './components/Bird'
+
+// Styles
+import {
+  Container,
+  GameBox,
+} from './styles/styles'
+
+export default function App() {
+  const [birdPosition, setBirdPosition] = useState(250)
+
+  const BIRD_SIZE = 20
+  const GAMEBOX_HEIGHT = 500
+  const GAMEBOX_WIDTH = 500
+  const GRAVITY = 7
+
+  useEffect(() => {
+    let timeId;
+    if (birdPosition < GAMEBOX_HEIGHT - BIRD_SIZE) {
+      timeId = setInterval(() => {
+        setBirdPosition((birdPosition) => birdPosition + GRAVITY)
+      }, 24)
+    }
+
+    return () => {
+      clearInterval(timeId)
+    }
+  })
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <Container>
+      <GameBox height={GAMEBOX_HEIGHT} width={GAMEBOX_WIDTH}>
+        <Bird size={BIRD_SIZE} top={birdPosition}/>
+      </GameBox>
+    </Container>
   )
 }
 
-export default App
