@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="52.21 160.48 347.08 415.954" width="347.08" height="415.954" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="linearGradient3166" y2="139.51" gradientUnits="userSpaceOnUse" x2="-286.43" gradientTransform="matrix(.76923 0 0 2.5351 -118.68 69.419)" y1="139.51" x1="-742.14" xlink:href="#linearGradient3152"/>
+    <linearGradient id="linearGradient3152">
+      <stop id="stop3154" style="stop-color:#009a11" offset="0"/>
+      <stop id="stop3156" style="stop-color:#00cb17" offset="1"/>
+    </linearGradient>
+  </defs>
+  <rect id="rect3164" style="stroke-linejoin:round;stroke:#005e04;stroke-width:10;fill:url(#linearGradient3166)" height="412.86" width="342.86" y="216.65" x="-685.71" transform="matrix(1, 0, 0, 1, 742.140015, -53.076)"/>
+  <rect id="rect3168" style="fill: rgb(0, 216, 24);" height="404.196" width="68.596" y="218.884" x="-492.16" transform="matrix(1, 0, 0, 1, 742.140015, -53.076)"/>
+  <rect id="rect3170" style="fill: rgb(0, 216, 24);" height="402.345" width="27.168" y="220.735" x="-405.58" transform="matrix(1, 0, 0, 1, 742.140015, -53.076)"/>
+  <rect id="rect3174" style="fill: rgb(0, 130, 14);" height="402.69" width="51.429" y="221.63" x="-680.36" transform="matrix(1, 0, 0, 1, 742.140015, -53.076)"/>
+  <rect id="rect3180" style="fill: rgb(0, 94, 4);" height="411.074" width="16.162" y="216.016" x="-689.93" transform="matrix(1, 0, 0, 1, 742.140015, -53.076)"/>
+  <rect id="rect3184" style="fill: rgb(0, 130, 14);" height="406.654" width="7.992" y="217.706" x="-618.04" transform="matrix(1, 0, 0, 1, 742.140015, -53.076)"/>
+  <rect x="-655.111" y="213.556" width="288.246" height="8.024" style="fill: rgb(0, 94, 20);" transform="matrix(1, 0, 0, 1, 742.140015, -53.076)"/>
+</svg>

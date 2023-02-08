@@ -2,7 +2,7 @@
 import React, { useState, useEffect }from "react"
 import styled from "styled-components"
 
-const BIRD_SIZE = 28
+const BIRD_SIZE = 40
 const GAMEBOX_HEIGHT = 500
 const GAMEBOX_WIDTH = 500
 const GRAVITY = 10
@@ -78,20 +78,25 @@ export default function App() {
   return (
     <Container onClick={handleJump}>
       <GameBox height={GAMEBOX_HEIGHT} width={GAMEBOX_WIDTH}>
-        <Bird size={BIRD_SIZE} top={birdPosition}/>
-        <Obstacle 
+        <Bird size={BIRD_SIZE} top={birdPosition} />
+        <TopObstacle 
           top={0}
           width={OBSTACLE_WIDTH}
           height={obstacleHeight}
           left={obstacleLeft + OBSTACLE_WIDTH}
           />
-        <Obstacle 
+        <BottomObstacle 
           top={GAMEBOX_HEIGHT - (obstacleHeight + bottomObstacleHeight)}
           width={OBSTACLE_WIDTH}
           height={bottomObstacleHeight}
           left={obstacleLeft + OBSTACLE_WIDTH}
           />
           <ShowScore>{score}</ShowScore>
+          {gameStarted ? null : <>
+          <RestartButton onClick={() => location.reload()}>Reiniciar</RestartButton>
+          <StartText>Clique na tela para iniciar</StartText>
+          <RestartText>Caso tenha morrido, clique em reiniciar</RestartText>
+          </>}
       </GameBox>
     </Container>
   )
@@ -100,13 +105,13 @@ export default function App() {
 export const Bird = styled.div`
     position: absolute;
     left: 45%;
-    background-color: red;
+    background-image: url("/src/flappybird.png");
+    background-size: 50px;
     height: ${(props) => props.size}px;
     width: ${(props) => props.size}px;
     margin-top: ${(props) => props.top}px;
     border: 0;
     border-radius: 50%;
-    transition: 0.15s;
 `;
 
 export const Container = styled.div`
@@ -118,24 +123,71 @@ export const Container = styled.div`
 export const GameBox = styled.div`
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
-    background-color: blue;
+
+    background-image: url("/src/background.png");
+    background-size: cover;
     overflow: hidden;
 `;
 
-export const Obstacle = styled.div`
+export const TopObstacle = styled.div`
     position: relative;
     top: ${(props) => props.top}px;
     left: ${(props) => props.left}px;
-    background-color: green;
-    background-image: url("obstacle.svg");
+    background-image: url("/src/obstacle.svg");
+    transform: rotate(180deg);
+    background-size: cover;
+    height: ${(props) => props.height}px;
+    width: ${(props) => props.width}px;
+`;
+
+export const BottomObstacle = styled.div`
+    position: relative;
+    top: ${(props) => props.top}px;
+    left: ${(props) => props.left}px;
+    background-image: url("/src/obstacle.svg");
+    background-size: cover;
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
 `;
 
 export const ShowScore = styled.div`
   position: absolute;
-  font-size: 54px;
+  font-size: 60px;
+  color: grey;
   top: 10%;
   left: 50%;
   transform: translate(-50%, 0);
+`;
+
+export const RestartButton = styled.button`
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60px;
+  width: 120px;
+  border: 5px solid grey;
+  border-radius: 5%;
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+  background-image: linear-gradient(#f0f0f0, #afafaf);
+`;
+
+export const StartText = styled.span`
+  position: absolute;
+  font-size: 24px;
+  color: black;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 35%;
+`;
+
+export const RestartText = styled.span`
+  position: absolute;
+  font-size: 24px;
+  color: black;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 45%;
 `;
