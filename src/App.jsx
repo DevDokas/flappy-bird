@@ -1,23 +1,13 @@
 //
 import React, { useState, useEffect }from "react"
 import styled from "styled-components"
-/*
-// Components
-import { Bird } from './components/Bird'
-import { Obstacle } from './components/Obstacle'
 
-// Styles
-import {
-  Container,
-  GameBox,
-} from './styles/styles' */
-
-const BIRD_SIZE = 20
+const BIRD_SIZE = 28
 const GAMEBOX_HEIGHT = 500
 const GAMEBOX_WIDTH = 500
-const GRAVITY = 6
-const JUMP_HEIGHT = 100
-const OBSTACLE_WIDTH = 40
+const GRAVITY = 10
+const JUMP_HEIGHT = 150
+const OBSTACLE_WIDTH = 80
 const OBSTACLE_GAP = 200
 
 export default function App() {
@@ -26,6 +16,7 @@ export default function App() {
   const [gameStarted, setGameStarted] = useState(false)
   const [obstacleHeight, setObstacleHeight] = useState(50)
   const [obstacleLeft, setObstacleLeft] = useState(GAMEBOX_WIDTH - OBSTACLE_WIDTH)
+  const [score, setScore] = useState(0)
 
   const bottomObstacleHeight = GAMEBOX_HEIGHT - OBSTACLE_GAP - obstacleHeight
 
@@ -41,6 +32,36 @@ export default function App() {
       clearInterval(timeId)
     }
   }, [birdPosition, gameStarted])
+
+  useEffect(() => {
+    let obstacleId
+    if (gameStarted && obstacleLeft >= -OBSTACLE_WIDTH) {
+      obstacleId = setInterval(() => {
+        setObstacleLeft((obstacleLeft) => obstacleLeft - 5)
+      }, 24)
+
+      return () => {
+        clearInterval(obstacleId)
+      }
+    } else if (gameStarted) {
+      setObstacleLeft(GAMEBOX_WIDTH - OBSTACLE_WIDTH)
+      setObstacleHeight(Math.floor(Math.random() * (GAMEBOX_HEIGHT - OBSTACLE_GAP - BIRD_SIZE))
+      )
+      setScore(score => score + 1)
+    }
+  }, [gameStarted, obstacleLeft])
+
+  useEffect(() => {
+    const collidedWithTop = birdPosition >= 0 && birdPosition < (obstacleHeight - BIRD_SIZE/1.5)
+    const collidedWithBottom =  birdPosition <= 500 && birdPosition >= 500 - bottomObstacleHeight
+    const collidedWithFloor = birdPosition >= 470
+
+    if (obstacleLeft >= 0 && obstacleLeft <= OBSTACLE_WIDTH && (collidedWithBottom || collidedWithTop)) {
+      setGameStarted(false)
+    } else if (collidedWithFloor) {
+      setGameStarted(false)
+    }
+  }, [birdPosition, obstacleHeight, bottomObstacleHeight, obstacleLeft])
 
   const handleJump = () => {
     let newBirdPosition = birdPosition - JUMP_HEIGHT
@@ -62,14 +83,15 @@ export default function App() {
           top={0}
           width={OBSTACLE_WIDTH}
           height={obstacleHeight}
-          left={obstacleLeft}
-        />
+          left={obstacleLeft + OBSTACLE_WIDTH}
+          />
         <Obstacle 
           top={GAMEBOX_HEIGHT - (obstacleHeight + bottomObstacleHeight)}
           width={OBSTACLE_WIDTH}
           height={bottomObstacleHeight}
-          left={obstacleLeft}
-        />
+          left={obstacleLeft + OBSTACLE_WIDTH}
+          />
+          <ShowScore>{score}</ShowScore>
       </GameBox>
     </Container>
   )
@@ -77,12 +99,14 @@ export default function App() {
 
 export const Bird = styled.div`
     position: absolute;
+    left: 45%;
     background-color: red;
     height: ${(props) => props.size}px;
     width: ${(props) => props.size}px;
     margin-top: ${(props) => props.top}px;
     border: 0;
     border-radius: 50%;
+    transition: 0.15s;
 `;
 
 export const Container = styled.div`
@@ -94,14 +118,24 @@ export const Container = styled.div`
 export const GameBox = styled.div`
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
-    background-color: green;
+    background-color: blue;
+    overflow: hidden;
 `;
 
 export const Obstacle = styled.div`
     position: relative;
     top: ${(props) => props.top}px;
     left: ${(props) => props.left}px;
-    background-color: blue;
+    background-color: green;
+    background-image: url("obstacle.svg");
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
+`;
+
+export const ShowScore = styled.div`
+  position: absolute;
+  font-size: 54px;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
 `;
