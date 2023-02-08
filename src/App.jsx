@@ -122,9 +122,9 @@ export const Container = styled.div`
 
 export const GameBox = styled.div`
     position: relative;
+    margin-top: 200px;
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
-
     background-image: url("/src/assets/background.png");
     background-size: cover;
     overflow: hidden;
