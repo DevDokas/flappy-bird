@@ -15,15 +15,17 @@ import {
 
 export default function App() {
   const [birdPosition, setBirdPosition] = useState(250)
+  const [gameStarted, setGameStarted] = useState(false)
 
   const BIRD_SIZE = 20
   const GAMEBOX_HEIGHT = 500
   const GAMEBOX_WIDTH = 500
   const GRAVITY = 7
+  const JUMP_HEIGHT = 100
 
   useEffect(() => {
     let timeId;
-    if (birdPosition < GAMEBOX_HEIGHT - BIRD_SIZE) {
+    if (gameStarted && birdPosition < GAMEBOX_HEIGHT - BIRD_SIZE) {
       timeId = setInterval(() => {
         setBirdPosition((birdPosition) => birdPosition + GRAVITY)
       }, 24)
@@ -32,10 +34,22 @@ export default function App() {
     return () => {
       clearInterval(timeId)
     }
-  })
+  }, [birdPosition, gameStarted])
+
+  const handleJump = () => {
+    let newBirdPosition = birdPosition - JUMP_HEIGHT
+    if (!gameStarted) {
+      setGameStarted(true)
+    } else if (newBirdPosition < 0) {
+      setBirdPosition(0)
+    } else {
+      setBirdPosition(newBirdPosition)
+    }
+
+  }
 
   return (
-    <Container>
+    <Container onClick={handleJump}>
       <GameBox height={GAMEBOX_HEIGHT} width={GAMEBOX_WIDTH}>
         <Bird size={BIRD_SIZE} top={birdPosition}/>
       </GameBox>
