@@ -35,7 +35,7 @@ export default function App() {
 
   useEffect(() => {
     let obstacleId
-    if (gameStarted && obstacleLeft >= -OBSTACLE_WIDTH) {
+    if (gameStarted && obstacleLeft >= - (2 * OBSTACLE_WIDTH)) {
       obstacleId = setInterval(() => {
         setObstacleLeft((obstacleLeft) => obstacleLeft - 5)
       }, 24)
@@ -54,7 +54,7 @@ export default function App() {
   useEffect(() => {
     const collidedWithTop = birdPosition >= 0 && birdPosition < (obstacleHeight - BIRD_SIZE/1.5)
     const collidedWithBottom =  birdPosition <= 500 && birdPosition >= 500 - bottomObstacleHeight
-    const collidedWithFloor = birdPosition >= 470
+    const collidedWithFloor = birdPosition >= 460
 
     if (obstacleLeft >= 0 && obstacleLeft <= OBSTACLE_WIDTH && (collidedWithBottom || collidedWithTop)) {
       setGameStarted(false)
@@ -121,6 +121,7 @@ export const Container = styled.div`
 `;
 
 export const GameBox = styled.div`
+    position: relative;
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
 
@@ -161,7 +162,7 @@ export const ShowScore = styled.div`
 
 export const RestartButton = styled.button`
   position: absolute;
-  top: 15%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 60px;
@@ -176,20 +177,20 @@ export const RestartButton = styled.button`
 
 export const StartText = styled.span`
   position: absolute;
+  text-align: center;
   font-size: 24px;
   font-weight: 500;
   color: rgba(0,0,0,0.8);
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 35%;
+  top: 70%;
+  width: 100%;
 `;
 
 export const RestartText = styled.span`
   position: absolute;
+  text-align: center;
   font-size: 24px;
   font-weight: 500;
   color: rgba(0,0,0,0.8);
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 45%;
+  top: 85%;
+  width:100%;
 `;
