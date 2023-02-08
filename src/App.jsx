@@ -105,7 +105,7 @@ export default function App() {
 export const Bird = styled.div`
     position: absolute;
     left: 45%;
-    background-image: url("/src/flappybird.png");
+    background-image: url("/src/assets/flappybird.png");
     background-size: 50px;
     height: ${(props) => props.size}px;
     width: ${(props) => props.size}px;
@@ -124,7 +124,7 @@ export const GameBox = styled.div`
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
 
-    background-image: url("/src/background.png");
+    background-image: url("/src/assets/background.png");
     background-size: cover;
     overflow: hidden;
 `;
@@ -133,7 +133,7 @@ export const TopObstacle = styled.div`
     position: relative;
     top: ${(props) => props.top}px;
     left: ${(props) => props.left}px;
-    background-image: url("/src/obstacle.svg");
+    background-image: url("/src/assets/obstacle.svg");
     transform: rotate(180deg);
     background-size: cover;
     height: ${(props) => props.height}px;
@@ -144,7 +144,7 @@ export const BottomObstacle = styled.div`
     position: relative;
     top: ${(props) => props.top}px;
     left: ${(props) => props.left}px;
-    background-image: url("/src/obstacle.svg");
+    background-image: url("/src/assets/obstacle.svg");
     background-size: cover;
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
@@ -177,7 +177,8 @@ export const RestartButton = styled.button`
 export const StartText = styled.span`
   position: absolute;
   font-size: 24px;
-  color: black;
+  font-weight: 500;
+  color: rgba(0,0,0,0.8);
   transform: translate(-50%, -50%);
   left: 50%;
   top: 35%;
@@ -186,7 +187,8 @@ export const StartText = styled.span`
 export const RestartText = styled.span`
   position: absolute;
   font-size: 24px;
-  color: black;
+  font-weight: 500;
+  color: rgba(0,0,0,0.8);
   transform: translate(-50%, -50%);
   left: 50%;
   top: 45%;
