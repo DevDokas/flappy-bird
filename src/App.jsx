@@ -105,7 +105,7 @@ export default function App() {
 export const Bird = styled.div`
     position: absolute;
     left: 45%;
-    background-image: url("/src/assets/flappybird.png");
+    background-image: url("https://i.imgur.com/mq3SR5t.png");
     background-size: 50px;
     height: ${(props) => props.size}px;
     width: ${(props) => props.size}px;
@@ -125,7 +125,7 @@ export const GameBox = styled.div`
     margin-top: 200px;
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
-    background-image: url("/src/assets/background.png");
+    background-image: url("https://i.imgur.com/Q3ivD6d.png");
     background-size: cover;
     overflow: hidden;
 `;
@@ -134,7 +134,7 @@ export const TopObstacle = styled.div`
     position: relative;
     top: ${(props) => props.top}px;
     left: ${(props) => props.left}px;
-    background-image: url("/src/assets/obstacle.svg");
+    background-image: url("https://i.imgur.com/KKFutQX.png");
     transform: rotate(180deg);
     background-size: cover;
     height: ${(props) => props.height}px;
@@ -145,7 +145,7 @@ export const BottomObstacle = styled.div`
     position: relative;
     top: ${(props) => props.top}px;
     left: ${(props) => props.left}px;
-    background-image: url("/src/assets/obstacle.svg");
+    background-image: url("https://i.imgur.com/KKFutQX.png");
     background-size: cover;
     height: ${(props) => props.height}px;
     width: ${(props) => props.width}px;
